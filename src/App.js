@@ -1,8 +1,19 @@
 import React from 'react';
-import HomePage from './Pages/HomePage'; // Adjust the path based on where HomePage.js is located
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './Pages/HomePage';
+import SignInPage from './Pages/SignInPage';
+import SignUpPage from './Pages/SignUpPage';
 
 function App() {
-  return <HomePage />;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

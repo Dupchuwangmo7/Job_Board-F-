@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
@@ -10,23 +11,21 @@ const HomePage = () => {
           <a href="#" style={styles.navLink}>Home</a>
           <a href="#" style={styles.navLink}>About</a>
           <a href="#" style={styles.navLink}>Company reviews</a>
-        
         </nav>
         <div style={styles.authLinks}>
-          <a href="#" style={styles.authLink}>Sign in/ Sign Up</a>
-          
+          <Link to="/sign-in" style={styles.authLink}>Sign in</Link>
+          <Link to="/sign-up" style={styles.authLink}>Sign Up</Link>
         </div>
       </header>
-
-      {/* Search Section */}
-      <section style={styles.searchSection}>
+            {/* Search Section */}
+            <section style={styles.searchSection}>
         <div style={styles.searchContainer}>
           <input
             type="text"
             placeholder="Job title, keywords, or company"
             style={styles.input}
           />
-         
+          
           <button style={styles.searchButton}>Search</button>
         </div>
       </section>
@@ -44,6 +43,7 @@ const HomePage = () => {
           style={styles.heroImage}
         />
       </section>
+
     </div>
   );
 };
