@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './Pages/HomePage';
 import SignInPage from './Pages/SignInPage';
-import SignUpPage from './Pages/SignUpPage';
-import EmployerPage from "./Pages/EmployerPage";
-import SeekerPage from "./Pages/SeekerPage";
+import SignUpPage from './SignUpPage/SignUpPage';
+import EmployerPage from "./SignUpPage/EmployerPage";
+import SeekerPage from "./SignUpPage/SeekerPage";
 
 
 function App() {
