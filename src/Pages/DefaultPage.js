@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 
 const DefaultPage = () => {
   return (
-    <div className="font-sans bg-gray-50">
+    <div className="font-sans bg-gray-50 min-h-screen">
 
       {/* Header */}
       <header className="flex justify-between items-center px-8 py-4 bg-gradient-to-r from-red-500 to-yellow-500 text-white shadow-lg">
         <div className="text-3xl font-bold">JobBoard Bhutan</div>
         <nav className="hidden md:flex space-x-6">
-          <a href="#" className="text-white hover:text-yellow-300">Home</a>
-          <a href="#" className="text-white hover:text-yellow-300">About</a>
+          <Link to="/" className="text-white hover:text-yellow-300">Home</Link>
+          <Link to="/about" className="text-white hover:text-yellow-300">About</Link>
           <a href="#" className="text-white hover:text-yellow-300">Companies</a>
         </nav>
         <div className="flex space-x-6">
@@ -24,13 +24,15 @@ const DefaultPage = () => {
         <div className="max-w-4xl mx-auto text-center text-white">
           <h1 className="text-4xl font-bold">Find Your Dream Job in Bhutan</h1>
           <p className="mt-4 text-lg">Explore opportunities in Bhutan’s growing tech ecosystem and beyond.</p>
-          <div className="mt-8">
+          <div className="mt-8 flex flex-col md:flex-row items-center justify-center gap-4">
             <input
               type="text"
               placeholder="Job title, skills, or company"
               className="p-4 w-full md:w-1/2 rounded-lg shadow-lg text-gray-800"
             />
-            <button className="mt-6 px-8 py-4 bg-white text-red-500 rounded-lg shadow-md hover:bg-gray-100 transition duration-200">Search</button>
+            <button className="px-8 py-4 bg-white text-red-500 rounded-lg shadow-md hover:bg-gray-100 transition duration-200">
+              Search
+            </button>
           </div>
         </div>
       </section>
@@ -66,7 +68,7 @@ const DefaultPage = () => {
       <section className="py-16 bg-gray-50 text-center">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-800">What Bhutanese Youth are Saying</h2>
-          <div className="mt-8 flex justify-center space-x-12">
+          <div className="mt-8 flex flex-wrap justify-center gap-12">
             <div className="w-64 bg-white p-6 rounded-lg shadow-lg">
               <p className="text-lg text-gray-700">“I found a job in a startup in Thimphu that aligns with my skills in tech. The process was quick and easy!”</p>
               <div className="mt-4 text-red-500 font-semibold">Tashi Dorji, Web Developer</div>
