@@ -14,22 +14,22 @@ const SignUpPage = () => {
   };
 
   return (
-    <div style={styles.pageContainer}>
-      <div style={styles.card}>
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="bg-white p-8 w-full max-w-md rounded-lg shadow-lg text-center">
         {/* Header */}
-        <h2 style={styles.header}>Welcome to Job Board Bhutan</h2>
-        <p style={styles.subHeader}>Sign Up As</p>
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Welcome to Job Board Bhutan</h2>
+        <p className="text-gray-600 text-lg mb-6">Sign Up As</p>
 
         {/* Buttons */}
-        <div style={styles.buttonContainer}>
+        <div className="flex flex-col gap-4">
           <button
-            style={styles.button}
+            className="py-2 px-6 text-lg font-semibold text-white bg-indigo-600 rounded-full hover:bg-indigo-700 transition duration-300"
             onClick={() => handleNavigation("employer")}
           >
             Employer
           </button>
           <button
-            style={styles.button}
+            className="py-2 px-6 text-lg font-semibold text-white bg-indigo-600 rounded-full hover:bg-indigo-700 transition duration-300"
             onClick={() => handleNavigation("seeker")}
           >
             Seeker
@@ -38,50 +38,6 @@ const SignUpPage = () => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  pageContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    backgroundColor: "#f9f9f9",
-  },
-  card: {
-    backgroundColor: "#fff",
-    borderRadius: "8px",
-    padding: "30px",
-    width: "400px",
-    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-    textAlign: "center",
-  },
-  header: {
-    margin: "0 0 10px",
-    fontSize: "24px",
-    fontWeight: "bold",
-    color: "#333",
-  },
-  subHeader: {
-    marginBottom: "20px",
-    fontSize: "16px",
-    color: "#666",
-  },
-  buttonContainer: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px",
-  },
-  button: {
-    padding: "10px",
-    fontSize: "16px",
-    color: "#fff",
-    backgroundColor: "#3b82f6",
-    border: "none",
-    borderRadius: "50px",
-    cursor: "pointer",
-    transition: "background-color 0.3s",
-  },
 };
 
 export default SignUpPage;

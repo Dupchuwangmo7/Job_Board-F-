@@ -1,21 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './Pages/HomePage';
+import DefaultPage from './Pages/DefaultPage';
 import SignInPage from './Pages/SignInPage';
 import SignUpPage from './SignUpPage/SignUpPage';
-import EmployerPage from "./SignUpPage/EmployerPage";
-import SeekerPage from "./SignUpPage/SeekerPage";
+import EmployerSignupPage from "./SignUpPage/EmployerSignupPage";
+import SeekerSignupPage from "./SignUpPage/SeekerSignupPage";
 
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<DefaultPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/employer-signup" element={<EmployerPage />} />
-        <Route path="/seeker-signup" element={<SeekerPage />} />
+        <Route path="/employer-signup" element={<EmployerSignupPage />} />
+        <Route path="/seeker-signup" element={<SeekerSignupPage />} />
       </Routes>
     </Router>
   );

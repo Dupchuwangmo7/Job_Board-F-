@@ -1,151 +1,78 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignInPage = () => {
-  return (
-    <div style={styles.pageContainer}>
-      <div style={styles.card}>
-        {/* Header */}
-        <h2 style={styles.header}>Welcome back</h2>
-        <p style={styles.subHeader}>Enter your details to sign in</p>
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-        {/* Form */}
-        <form>
-          {/* Email Input */}
-          <label style={styles.label}>Email</label>
+  useEffect(() => {
+    // Clear the password when the component mounts to prevent any pre-filled value
+    setPassword("");
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Handle the login logic, for now, we just log the details
+    console.log(email, password);
+    // Redirect to dashboard or another page
+    navigate("/dashboard");
+  };
+
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="bg-white rounded-lg p-8 w-96 shadow-lg text-center">
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">Welcome back</h2>
+        <p className="text-gray-600 text-sm mb-6">Enter your details to sign in</p>
+        
+        <form onSubmit={handleSubmit}>
+          <label className="block text-left text-sm text-gray-800 mb-2">Email</label>
           <input
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            style={styles.input}
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md text-sm"
+            required
+            autoComplete="email"  // Optional: Allows the browser to autofill email but not password
           />
 
-          {/* Password Input */}
-          <label style={styles.label}>Password</label>
+          <label className="block text-left text-sm text-gray-800 mb-2">Password</label>
           <input
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
-            style={styles.input}
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md text-sm"
+            required
+            autoComplete="new-password"  // Prevents the browser from pre-filling the password
           />
 
-          {/* Remember Me and Forgot Password */}
-          <div style={styles.optionsContainer}>
-            <label style={styles.rememberMe}>
-              <input type="checkbox" style={styles.checkbox} /> Remember Me
-            </label>
-            <a href="#" style={styles.forgotPassword}>
-              Forgot password?
-            </a>
-          </div>
-
-          {/* Sign In Button */}
-          <button type="submit" style={styles.signInButton}>
+          <button
+            type="submit"
+            className="w-full p-3 mb-4 bg-purple-600 text-white rounded-md text-lg"
+          >
             Sign in
           </button>
 
-          {/* Sign in with Google */}
-          <button type="button" style={styles.googleButton}>
+          <button
+            type="button"
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md text-lg text-gray-800"
+          >
             Sign in with Google
           </button>
         </form>
 
-       
+        <p className="text-sm text-gray-600 mt-4">
+          Don't have an account?{" "}
+          <a href="/sign-up" className="text-purple-600 hover:underline">
+            Sign up
+          </a>
+        </p>
       </div>
     </div>
   );
-};
-
-const styles = {
-  pageContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    backgroundColor: "#f9f9f9",
-  },
-  card: {
-    backgroundColor: "#fff",
-    borderRadius: "8px",
-    padding: "30px",
-    width: "400px",
-    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-    textAlign: "center",
-  },
-  header: {
-    margin: "0 0 10px",
-    fontSize: "24px",
-    fontWeight: "bold",
-    color: "#333",
-  },
-  subHeader: {
-    marginBottom: "20px",
-    color: "#666",
-    fontSize: "14px",
-  },
-  label: {
-    display: "block",
-    textAlign: "left",
-    marginTop: "10px",
-    marginBottom: "5px",
-    fontSize: "14px",
-    color: "#333",
-  },
-  input: {
-    width: "100%",
-    padding: "10px",
-    marginBottom: "15px",
-    border: "1px solid #ddd",
-    borderRadius: "5px",
-    fontSize: "14px",
-  },
-  optionsContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "20px",
-  },
-  rememberMe: {
-    fontSize: "14px",
-    color: "#333",
-    display: "flex",
-    alignItems: "center",
-  },
-  checkbox: {
-    marginRight: "5px",
-  },
-  forgotPassword: {
-    fontSize: "14px",
-    color: "#6a0dad",
-    textDecoration: "none",
-  },
-  signInButton: {
-    width: "100%",
-    padding: "10px",
-    marginBottom: "10px",
-    backgroundColor: "#6a0dad",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    fontSize: "16px",
-    cursor: "pointer",
-  },
-  googleButton: {
-    width: "100%",
-    padding: "10px",
-    backgroundColor: "#fff",
-    color: "#333",
-    border: "1px solid #ddd",
-    borderRadius: "5px",
-    fontSize: "16px",
-    cursor: "pointer",
-  },
-  footerText: {
-    marginTop: "15px",
-    fontSize: "14px",
-    color: "#333",
-  },
-  signUpLink: {
-    color: "#6a0dad",
-    textDecoration: "none",
-  },
 };
 
 export default SignInPage;
