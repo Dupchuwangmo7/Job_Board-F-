@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Reusable Input Component
-const InputField = ({ label, type, name, value, placeholder, onChange }) => (
+const InputField = ({ label, type, name, value, placeholder, onChange, error }) => (
   <div className="mb-4">
     <label className="block text-sm font-medium text-gray-700 mb-2">{label}</label>
     <input
@@ -10,9 +10,12 @@ const InputField = ({ label, type, name, value, placeholder, onChange }) => (
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      className="w-full p-3 border border-gray-300 rounded-lg text-sm"
+      className={`w-full p-3 border ${
+        error ? "border-red-500" : "border-gray-300"
+      } rounded-lg text-sm`}
       autoComplete={type === "password" ? "new-password" : "on"}
     />
+    {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
   </div>
 );
 
@@ -42,25 +45,70 @@ const EmployerSignupPage = () => {
     location: "",
   });
 
-  const [error, setError] = useState(""); // State to hold error message
+  const [errors, setErrors] = useState({}); // State to hold error messages
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
-    setError(""); // Clear error when user starts typing again
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" })); // Clear error for the specific field
+  };
+
+  const validatePassword = () => {
+    const { password } = formData;
+    const minLength = 8;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasDigit = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    if (password.length < minLength) {
+      setErrors((prev) => ({ ...prev, password: "Password must be at least 8 characters long." }));
+      return false;
+    }
+    if (!hasUppercase) {
+      setErrors((prev) => ({ ...prev, password: "Password must contain at least one uppercase letter." }));
+      return false;
+    }
+    if (!hasLowercase) {
+      setErrors((prev) => ({ ...prev, password: "Password must contain at least one lowercase letter." }));
+      return false;
+    }
+    if (!hasDigit) {
+      setErrors((prev) => ({ ...prev, password: "Password must contain at least one number." }));
+      return false;
+    }
+    if (!hasSpecialChar) {
+      setErrors((prev) => ({ ...prev, password: "Password must contain at least one special character." }));
+      return false;
+    }
+    return true;
+  };
+
+  const validateContactNumber = () => {
+    const { contactNumber } = formData;
+    if (!/^\d{8}$/.test(contactNumber)) {
+      setErrors((prev) => ({ ...prev, contactNumber: "Contact number must be exactly 8 digits." }));
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const isPasswordValid = validatePassword();
+    const isContactNumberValid = validateContactNumber();
+
     // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match!");
-      return; // Stop form submission if passwords don't match
+      setErrors((prev) => ({ ...prev, confirmPassword: "Passwords do not match!" }));
+      return; // Stop submission if passwords don't match
     }
 
-    console.log("Employer Data Submitted:", formData);
-    // Add API call or validation logic here
+    if (isPasswordValid && isContactNumberValid) {
+      console.log("Employer Data Submitted:", formData);
+      // Add API call or validation logic here
+    }
   };
 
   return (
@@ -98,6 +146,7 @@ const EmployerSignupPage = () => {
           value={formData.password}
           placeholder="Enter password"
           onChange={handleChange}
+          error={errors.password}
         />
 
         <InputField
@@ -107,11 +156,8 @@ const EmployerSignupPage = () => {
           value={formData.confirmPassword}
           placeholder="Confirm password"
           onChange={handleChange}
+          error={errors.confirmPassword}
         />
-
-        {error && (
-          <div className="text-red-500 text-sm mb-4">{error}</div>
-        )}
 
         <InputField
           label="Website URL"
@@ -129,6 +175,7 @@ const EmployerSignupPage = () => {
           value={formData.contactNumber}
           placeholder="Enter contact number"
           onChange={handleChange}
+          error={errors.contactNumber}
         />
 
         <TextareaField

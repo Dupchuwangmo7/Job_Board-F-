@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 const SignInPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(""); // State for password error message
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -11,9 +12,46 @@ const SignInPage = () => {
     setPassword("");
   }, []);
 
+  const validatePassword = () => {
+    const minLength = 8;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasDigit = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    if (password.length < minLength) {
+      setPasswordError("Password must be at least 8 characters long.");
+      return false;
+    }
+    if (!hasUppercase) {
+      setPasswordError("Password must contain at least one uppercase letter.");
+      return false;
+    }
+    if (!hasLowercase) {
+      setPasswordError("Password must contain at least one lowercase letter.");
+      return false;
+    }
+    if (!hasDigit) {
+      setPasswordError("Password must contain at least one number.");
+      return false;
+    }
+    if (!hasSpecialChar) {
+      setPasswordError("Password must contain at least one special character.");
+      return false;
+    }
+
+    setPasswordError("");
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
+    // Validate the password before proceeding
+    if (!validatePassword()) {
+      return;
+    }
+
     // Handle the login logic, for now, we just log the details
     console.log(email, password);
     // Redirect to dashboard or another page
@@ -44,10 +82,13 @@ const SignInPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
-            className="w-full p-3 mb-4 border border-gray-300 rounded-md text-sm"
+            className="w-full p-3 mb-2 border border-gray-300 rounded-md text-sm"
             required
             autoComplete="new-password"  // Prevents the browser from pre-filling the password
           />
+          {passwordError && ( // Conditionally render password error
+            <p className="text-left text-sm text-red-600 mb-4">{passwordError}</p>
+          )}
 
           <button
             type="submit"

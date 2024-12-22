@@ -4,11 +4,15 @@ const SeekerSignupPage = () => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
+    password: "",
+    confirmPassword: "",
     portfolioURL: "",
     contactNumber: "",
     resume: null,
     location: "",
   });
+
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -19,10 +23,54 @@ const SeekerSignupPage = () => {
     }
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Password Validation
+    const password = formData.password;
+    if (!password) {
+      newErrors.password = "Password is required.";
+    } else if (password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters.";
+    } else if (!/[a-z]/.test(password)) {
+      newErrors.password = "Password must contain at least one lowercase letter.";
+    } else if (!/[A-Z]/.test(password)) {
+      newErrors.password = "Password must contain at least one uppercase letter.";
+    } else if (!/[0-9]/.test(password)) {
+      newErrors.password = "Password must contain at least one number.";
+    } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      newErrors.password = "Password must contain at least one special character.";
+    }
+
+    // Confirm Password Validation
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = "Please confirm your password.";
+    } else if (password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match.";
+    }
+
+    // Contact Number Validation
+    if (!formData.contactNumber) {
+      newErrors.contactNumber = "Contact number is required.";
+    } else if (!/^\d{8}$/.test(formData.contactNumber)) {
+      newErrors.contactNumber = "Contact number must be exactly 8 digits.";
+    }
+
+    setErrors(newErrors);
+
+    // Return true if no errors
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Job Seeker Data Submitted:", formData);
-    // Add API call or form validation logic here
+
+    if (validateForm()) {
+      console.log("Job Seeker Data Submitted:", formData);
+      // Add API call or additional logic here
+    } else {
+      console.log("Validation errors:", errors);
+    }
   };
 
   return (
@@ -50,6 +98,32 @@ const SeekerSignupPage = () => {
           className="w-full p-3 mt-2 border border-gray-300 rounded-md text-sm"
         />
 
+        <label className="block text-sm font-medium text-gray-700 mt-4">Password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter password"
+          value={formData.password}
+          onChange={handleChange}
+          className={`w-full p-3 mt-2 border ${
+            errors.password ? "border-red-500" : "border-gray-300"
+          } rounded-md text-sm`}
+        />
+        {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
+
+        <label className="block text-sm font-medium text-gray-700 mt-4">Confirm Password</label>
+        <input
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          className={`w-full p-3 mt-2 border ${
+            errors.confirmPassword ? "border-red-500" : "border-gray-300"
+          } rounded-md text-sm`}
+        />
+        {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
+
         <label className="block text-sm font-medium text-gray-700 mt-4">Portfolio URL</label>
         <input
           type="url"
@@ -67,8 +141,11 @@ const SeekerSignupPage = () => {
           placeholder="Enter contact number"
           value={formData.contactNumber}
           onChange={handleChange}
-          className="w-full p-3 mt-2 border border-gray-300 rounded-md text-sm"
+          className={`w-full p-3 mt-2 border ${
+            errors.contactNumber ? "border-red-500" : "border-gray-300"
+          } rounded-md text-sm`}
         />
+        {errors.contactNumber && <p className="text-red-500 text-xs mt-1">{errors.contactNumber}</p>}
 
         <label className="block text-sm font-medium text-gray-700 mt-4">Resume (Upload)</label>
         <input

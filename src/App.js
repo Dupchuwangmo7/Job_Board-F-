@@ -6,19 +6,22 @@ import AboutPage from './Pages/AboutPage';
 import SignUpPage from './SignUpPage/SignUpPage';
 import EmployerSignupPage from "./SignUpPage/EmployerSignupPage";
 import SeekerSignupPage from "./SignUpPage/SeekerSignupPage";
+import ErrorBoundary from './components/ErrorBoundary';
 
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<DefaultPage />} />
-        <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/employer-signup" element={<EmployerSignupPage />} />
-        <Route path="/seeker-signup" element={<SeekerSignupPage />} />
-      </Routes>
+      <ErrorBoundary>
+        <Routes>
+          <Route path="/" element={<DefaultPage />} />
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/employer-signup" element={<EmployerSignupPage />} />
+          <Route path="/seeker-signup" element={<SeekerSignupPage />} />
+        </Routes>
+      </ErrorBoundary>
     </Router>
   );
 }
