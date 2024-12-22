@@ -14,7 +14,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-blue-400 to-teal-300">
       <div className="bg-white p-8 w-full max-w-md rounded-lg shadow-lg text-center">
         {/* Header */}
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Welcome to Job Board Bhutan</h2>
@@ -23,13 +23,13 @@ const SignUpPage = () => {
         {/* Buttons */}
         <div className="flex flex-col gap-4">
           <button
-            className="py-2 px-6 text-lg font-semibold text-white bg-indigo-600 rounded-full hover:bg-indigo-700 transition duration-300"
+            className="py-2 px-6 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-500 rounded-full hover:bg-blue-700 hover:scale-105 transition-all duration-300"
             onClick={() => handleNavigation("employer")}
           >
             Employer
           </button>
           <button
-            className="py-2 px-6 text-lg font-semibold text-white bg-indigo-600 rounded-full hover:bg-indigo-700 transition duration-300"
+            className="py-2 px-6 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-500 rounded-full hover:bg-indigo-700 hover:scale-105 transition-all duration-300"
             onClick={() => handleNavigation("seeker")}
           >
             Seeker

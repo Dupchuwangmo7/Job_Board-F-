@@ -59,9 +59,9 @@ const SignInPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-400 to-teal-300">
       <div className="bg-white rounded-lg p-8 w-96 shadow-lg text-center">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Welcome back</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Welcome back</h2>
         <p className="text-gray-600 text-sm mb-6">Enter your details to sign in</p>
         
         <form onSubmit={handleSubmit}>
@@ -92,7 +92,7 @@ const SignInPage = () => {
 
           <button
             type="submit"
-            className="w-full p-3 mb-4 bg-purple-600 text-white rounded-md text-lg"
+            className="w-full p-3 mb-4 bg-gradient-to-r from-blue-600 to-indigo-500 text-white rounded-md text-lg hover:bg-indigo-600 transition duration-200"
           >
             Sign in
           </button>
@@ -107,7 +107,7 @@ const SignInPage = () => {
 
         <p className="text-sm text-gray-600 mt-4">
           Don't have an account?{" "}
-          <a href="/sign-up" className="text-purple-600 hover:underline">
+          <a href="/sign-up" className="text-blue-600 hover:underline">
             Sign up
           </a>
         </p>

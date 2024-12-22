@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // Reusable Input Component
 const InputField = ({ label, type, name, value, placeholder, onChange, error }) => (
   <div className="mb-4">
-    <label className="block text-sm font-medium text-gray-700 mb-2">{label}</label>
+    <label className="block text-sm font-medium text-gray-800 mb-2">{label}</label>
     <input
       type={type}
       name={name}
@@ -22,7 +22,7 @@ const InputField = ({ label, type, name, value, placeholder, onChange, error }) 
 // Reusable Textarea Component
 const TextareaField = ({ label, name, value, placeholder, onChange }) => (
   <div className="mb-4">
-    <label className="block text-sm font-medium text-gray-700 mb-2">{label}</label>
+    <label className="block text-sm font-medium text-gray-800 mb-2">{label}</label>
     <textarea
       name={name}
       placeholder={placeholder}
@@ -112,7 +112,7 @@ const EmployerSignupPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-400 to-teal-300">
       <form
         onSubmit={handleSubmit}
         className="w-96 p-6 bg-white rounded-lg shadow-lg"
@@ -197,7 +197,7 @@ const EmployerSignupPage = () => {
 
         <button
           type="submit"
-          className="w-full p-3 bg-purple-600 text-white rounded-lg text-sm font-semibold hover:bg-purple-700 focus:outline-none"
+          className="w-full p-3 bg-gradient-to-r from-blue-600 to-indigo-500 text-white rounded-lg text-sm font-semibold hover:bg-indigo-600 focus:outline-none"
         >
           Sign Up
         </button>
