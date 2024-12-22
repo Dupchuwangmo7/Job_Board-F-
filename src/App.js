@@ -1,13 +1,13 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import DefaultPage from './Pages/DefaultPage';
-import SignInPage from './Pages/SignInPage';
-import AboutPage from './Pages/AboutPage';
-import SignUpPage from './SignUpPage/SignUpPage';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import DefaultPage from "./Pages/DefaultPage";
+import SignInPage from "./Pages/SignInPage";
+import AboutPage from "./Pages/AboutPage";
+import SignUpPage from "./SignUpPage/SignUpPage";
 import EmployerSignupPage from "./SignUpPage/EmployerSignupPage";
 import SeekerSignupPage from "./SignUpPage/SeekerSignupPage";
-import ErrorBoundary from './components/ErrorBoundary';
-
+import SeekerDashboardPage from "./Pages/Seekerdashboard/SeekerDashboardPage"; // Import dashboard page
+import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/employer-signup" element={<EmployerSignupPage />} />
           <Route path="/seeker-signup" element={<SeekerSignupPage />} />
+          <Route path="/dashboard" element={<SeekerDashboardPage />} /> {/* Dashboard route */}
         </Routes>
       </ErrorBoundary>
     </Router>

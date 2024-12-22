@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const SeekerSignupPage = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const SeekerSignupPage = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate(); // Initialize navigate function
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -67,7 +69,8 @@ const SeekerSignupPage = () => {
 
     if (validateForm()) {
       console.log("Job Seeker Data Submitted:", formData);
-      // Add API call or additional logic here
+      // Navigate to dashboard after successful validation
+      navigate("/dashboard");
     } else {
       console.log("Validation errors:", errors);
     }
